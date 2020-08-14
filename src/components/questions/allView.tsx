@@ -3,7 +3,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Card from "react-bootstrap/Card";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
-import CardDeck from "react-bootstrap/CardDeck";
+import CardGroup from "react-bootstrap/CardGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -17,9 +17,9 @@ class AllQuestionsView extends React.Component {
     return (
       <Row>
         <Jumbotron>
-          <CardDeck>
+          <CardGroup>
             {this.state.questions.map((question) => this.Question(question))}
-          </CardDeck>
+          </CardGroup>
         </Jumbotron>
       </Row>
     );
@@ -32,7 +32,7 @@ class AllQuestionsView extends React.Component {
           bg={"dark"}
           style={{ height: "90%" }}
           text={"white"}
-          className="mb-2 mt-2 "
+          className="mb-2 mt-2"
         >
           <Card.Body>
             <Card.Title>{question.title}</Card.Title>
