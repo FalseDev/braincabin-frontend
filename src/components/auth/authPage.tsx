@@ -1,11 +1,11 @@
-import React from "react"
-import Container from "react-bootstrap/Container"
-import Tabs from "react-bootstrap/Tabs"
-import Tab from "react-bootstrap/Tab"
-import LoginForm from "./auth/login"
-import RegisterForm from "./auth/register"
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import LoginForm from "./login";
+import RegisterForm from "./register";
 
-function AuthPage(){
+function AuthPage() {
   return (
     <Container className="mt-5">
       <Tabs defaultActiveKey="login">
@@ -17,7 +17,7 @@ function AuthPage(){
         </Tab>
       </Tabs>
     </Container>
-  )
+  );
 }
 
-export default AuthPage
+export default AuthPage;

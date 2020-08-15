@@ -1,9 +1,9 @@
-import Button from "react-bootstrap/Button"
-import Form from "react-bootstrap/Form"
-import InputGroup from "react-bootstrap/InputGroup"
-import React from "react"
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import React from "react";
 
-function RegisterForm(){
+function RegisterForm() {
   return (
     <Form className="ml-2 mr-2">
       <Form.Group controlId="validationCustomUsername">
@@ -20,6 +20,17 @@ function RegisterForm(){
           />
         </InputGroup>
       </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Name</Form.Label>
+        <Form.Control type="text" placeholder="Your name" required />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" placeholder="Your email" required />
+      </Form.Group>
+
       <Form.Group controlId="formGroupPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" required />
@@ -29,12 +40,14 @@ function RegisterForm(){
         <Form.Label>Confirm your password</Form.Label>
         <Form.Control type="password" placeholder="Password" required />
       </Form.Group>
- 
+
       <Form.Group>
-        <Button block variant="secondary" active type="submit">Register</Button>
+        <Button block variant="secondary" active type="submit">
+          Register
+        </Button>
       </Form.Group>
-    </Form> 
-  )
+    </Form>
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;
