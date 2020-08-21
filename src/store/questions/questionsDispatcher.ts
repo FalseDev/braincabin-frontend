@@ -31,7 +31,7 @@ export const questionLoader = (start: number, stop: number) => async (
   dispatch(loadQuestions());
 
   const response = await axios.get("questions/all", {
-    baseURL: "http://edu-forum-backend.herokuapp.com/api/",
+    baseURL: "https://edu-forum-backend.herokuapp.com/api/",
     responseType: "json",
     params: { start, stop },
   });
