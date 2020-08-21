@@ -2,8 +2,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import React from "react";
+import { connect } from "react-redux";
+import { loggingIn } from "./../../store/auth/authDispatchers";
 
-function RegisterForm() {
+function RegisterForm(props: any) {
   return (
     <Form className="ml-2 mr-2">
       <Form.Group controlId="validationCustomUsername">
@@ -42,7 +44,14 @@ function RegisterForm() {
       </Form.Group>
 
       <Form.Group>
-        <Button block variant="secondary" active type="submit">
+        <Button
+          block
+          disabled={props.loggingIn}
+          variant="secondary"
+          active
+          type="submit"
+          onClick={() => props.dispatchLogin()}
+        >
           Register
         </Button>
       </Form.Group>
@@ -50,4 +59,12 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+const mapStateToProps = (state: any) => ({
+  loggingIn: state.auth.loggingIn,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  dispatchLogin: () => dispatch(loggingIn()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

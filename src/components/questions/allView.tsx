@@ -1,71 +1,45 @@
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
-import Card from "react-bootstrap/Card";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
-import CardGroup from "react-bootstrap/CardGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { connect } from "react-redux"
+import Questions from "./Questions"
+import {IQuestion} from "./Questions"
+import { questionLoader } from "../../store/questions/questionsDispatcher"
 
-class AllQuestionsView extends React.Component {
-  state = {
-    loading: true,
-    questions: [],
-  };
+interface IQuestionsProp{
+  questions:IQuestion[],
+  loading:Boolean,
+  loadQuestions:()=>void
+}
 
-  Questions() {
-    return (
-      <Row style={{ width: "100vw" }}>
-        <Jumbotron style={{ width: "100%", height: "100%" }}>
-          {this.state.questions.map((question) => this.Question(question))}
-        </Jumbotron>
-      </Row>
-    );
-  }
+class AllQuestionsView extends React.Component<IQuestionsProp> {
 
-  Question(question: {
-    title: string;
-    description: string;
-    tags: [string];
-    upvoteCount: number;
-    downvoteCount: number;
-    answerCount: number;
-    level: string;
-    subject: string;
-    user: { _id: string; name: string; username: string };
-  }) {
-    return (
-      <Row>
-        <Col style={{ border: 20 }} className="col-3">
-          {question.upvoteCount}
-          {question.downvoteCount}
-        </Col>
-        <Col className="col-9">{question.title}</Col>
-      </Row>
-    );
-  }
-
-  async componentDidMount() {
-    const res = await fetch(
-      "http://192.168.43.168:5000/api/questions/all" //https://edu-forum-backend.herokuapp.com/api/questions/all"
-    );
-    const data = await res.json();
-    this.setState({ loading: false, questions: data });
+  componentDidMount(){
+    this.props.loadQuestions()
   }
 
   render() {
     return (
       <div>
-        {this.state.loading ? (
-          <div>
+        {this.props.loading ? (
+          <Container className="align-middle">
             <Spinner animation="border" />
-          </div>
+          </Container>
         ) : (
-          this.Questions()
-        )}
+            Questions(this.props.questions)
+          )}
       </div>
     );
   }
 }
 
-export default AllQuestionsView;
+const mapStateToProps = (state: any) => ({
+  loading: state.questions.loadingQuestions,
+  questions: state.questions.questions
+})
+
+const mapDispatchersToProps = (dispatch: (action: any) => void) => ({
+  loadQuestions: (start = 1, stop = 5) => {dispatch(questionLoader(start, stop))}
+})
+
+export default connect(mapStateToProps, mapDispatchersToProps)(AllQuestionsView);
